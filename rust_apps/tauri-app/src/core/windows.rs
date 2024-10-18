@@ -12,15 +12,14 @@ pub fn open_translate(app: &AppHandle) -> Result<(), Error> {
         }
         window.set_focus()?;
     } else {
-        let window = WebviewWindowBuilder::new(
-            app,
-            window_label,
-            WebviewUrl::App("/translate".into()),
-        )
-        .transparent(true)
-        .decorations(false)
-        .title("翻译")
-        .build()?;
+        let window =
+            WebviewWindowBuilder::new(app, window_label, WebviewUrl::App("/translate".into()))
+                .transparent(true)
+                .decorations(false)
+                .inner_size(600.0, 600.0)
+                .title("翻译")
+                .center()
+                .build()?;
         register_window(app, &window);
     }
     Ok(())
@@ -35,16 +34,14 @@ pub fn open_setting(app: &AppHandle) -> Result<(), Error> {
         }
         window.set_focus()?;
     } else {
-        let window = WebviewWindowBuilder::new(
-            app,
-            window_label,
-            WebviewUrl::App("/setting".into()),
-        )
-        .transparent(false)
-        .decorations(true)
-        .title("设置")
-        .inner_size(500.0, 600.0)
-        .build()?;
+        let window =
+            WebviewWindowBuilder::new(app, window_label, WebviewUrl::App("/setting".into()))
+                .transparent(false)
+                .decorations(true)
+                .title("设置")
+                .inner_size(500.0, 600.0)
+                .center()
+                .build()?;
         // window_effects::setup(&window);
         register_window(app, &window);
     }
@@ -60,16 +57,14 @@ pub fn open_json(app: &AppHandle) -> Result<(), Error> {
         }
         window.set_focus()?;
     } else {
-        let window = WebviewWindowBuilder::new(
-            app,
-            window_label,
-            WebviewUrl::App("/json-editor".into()),
-        )
-        .transparent(true)
-        .decorations(true)
-        .title("Json Editor")
-        .inner_size(800.0, 600.0)
-        .build()?;
+        let window =
+            WebviewWindowBuilder::new(app, window_label, WebviewUrl::App("/json-editor".into()))
+                .transparent(true)
+                .decorations(true)
+                .title("Json Editor")
+                .inner_size(800.0, 600.0)
+                .center()
+                .build()?;
         window_effects::setup(&window);
         register_window(app, &window);
     }
