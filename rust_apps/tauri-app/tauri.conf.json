@@ -15,7 +15,8 @@
         "height": 600,
         "transparent": true,
         "decorations": true,
-        "visible": true
+        "visible": true,
+        "center": true
       }
     ],
     "macOSPrivateApi": true,
