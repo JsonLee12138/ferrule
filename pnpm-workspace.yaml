@@ -1,0 +1,3 @@
+packages:
+  - 'frontend_packages/*'
+  - 'frontend_apps/*'

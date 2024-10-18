@@ -1,0 +1,9 @@
+[package]
+name = "ferrume"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+[workspace]
+members = ["rust_apps/tauri-app"]

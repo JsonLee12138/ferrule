@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schema.tauri.app/config/2.0.0-rc",
+  "productName": "json-ferrume",
+  "version": "0.1.0",
+  "identifier": "com.json-ferrume.app",
+  "build": {
+    "devUrl": "http://localhost:3000",
+    "frontendDist": "../../frontend_apps/pc-ferrume/dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "json 笔记",
+        "width": 800,
+        "height": 600,
+        "transparent": true,
+        "decorations": true,
+        "visible": true
+      }
+    ],
+    "macOSPrivateApi": true,
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icons.icns", "icons/icon.ico"]
+  }
+}

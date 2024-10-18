@@ -1,0 +1,9 @@
+.container {
+  border: 1px solid transparent;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  color: #0f0f0f;
+  transition: border-color 0.25s;
+  @apply bg-white flex items-center justify-center rounded-md overflow-hidden pr-0.5 shadow border-none outline-none;
+}

@@ -1,0 +1,38 @@
+[package]
+name = "tauri-app"
+version = "0.1.0"
+edition = "2021"
+description = "A Tauri App"
+authors = ["you"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+name = "tauri_app"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.0.0-rc", features = [] }
+
+[dependencies]
+tauri = { version = "2.0.0-rc", features = ["macos-private-api", "tray-icon"] }
+tauri-plugin-shell = "2.0.0-rc"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+window-vibrancy = "0.5.2"
+global-hotkey = "0.6.2"
+reqwest = "0.12.8"
+sea-orm = { version = "1.0.1", features = ["sqlx-sqlite", "runtime-tokio-native-tls"] }
+tokio = "1.40.0"
+tauri-plugin-store = "2.0.0-rc"
+sys-locale = "0.3.1"
+tauri-plugin-clipboard-manager = "2.0.1"
+tauri-plugin-dialog = "2.0.0-rc"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+cocoa = "0.26.0"
+objc = "0.2.7"
+
+[target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
+tauri-plugin-autostart = "2.0.0-rc"
+tauri-plugin-global-shortcut = "2.0.0-rc"
