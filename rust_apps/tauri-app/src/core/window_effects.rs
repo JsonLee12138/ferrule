@@ -1,5 +1,6 @@
 #[cfg(target_os = "macos")]
 use window_vibrancy::apply_vibrancy;
+#[cfg(target_os = "macos")]
 use window_vibrancy::NSVisualEffectMaterial;
 
 pub fn setup(window: &tauri::WebviewWindow) {

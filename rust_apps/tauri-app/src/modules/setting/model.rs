@@ -61,7 +61,9 @@ fn get_system_language() -> String {
         "ZH-HANS".to_string()
     } else if locale.contains("EN") && !locale.contains("GB") {
         "EN-US".to_string()
-    } else {
+    } else if locale.contains("ZH") && !locale.contains("TW") {
+        "ZH".to_string()
+    }else {
         locale
     }
 }

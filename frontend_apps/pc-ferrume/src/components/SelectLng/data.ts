@@ -160,5 +160,10 @@ export const lngOptions: LngItem[] = [
     language: 'ZH-HANS',
     name: 'Chinese (simplified)',
     supports_formality: false
+  },
+  {
+    language: 'ZH-TW',
+    name: 'Chinese (traditional)',
+    supports_formality: false
   }
 ] as const;
