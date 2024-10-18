@@ -21,8 +21,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Bun
-        uses: oven-sh/setup-bun@v2
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
 
       - name: Set up Rust
         uses: actions-rs/toolchain@v1
@@ -31,7 +31,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          bun install
+          pnpm install
+
+      - name: Build frontend
+        run: |
+          cd frontend_apps/pc-ferrume
+          pnpm run build
 
       - name: Create release
         id: create_release
