@@ -34,7 +34,7 @@ const SetHotKey = ({value, onChange}: SetHotKeyProps) => {
   return (
     <>
       <input
-        className="w-fit text-center pr-2 rounded-md py-1 focus:outline outline-indigo-500 bg-stone-100 text-[#333] text-sm/6 hover:shadow"
+        className="w-fit text-center pr-2 rounded-md py-1 focus:outline outline-indigo-500 bg-stone-200/60 text-[#333] text-sm/6 hover:shadow"
         ref={inputRef}
         type="text"
         value={value}

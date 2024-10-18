@@ -1,13 +1,14 @@
 .j-select-container {
-  --active-bg: #f5f5f4;
+  --active-bg: rgba(231, 229, 228, 0.6);
   position: relative;
   display: flex;
   align-items: center;
   padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
+  border-radius: 0.375rem;
   cursor: pointer;
-  outline: none;
+  // outline: none;
   width: fit-content;
+  background-color: var(--active-bg);
 
   &:hover {
     background-color: var(--active-bg);
@@ -19,6 +20,8 @@
     // outline-offset: -2px;
     background-color: var(--active-bg);
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    outline: 3px solid #6366f1;
+    outline-offset: -2px;
   }
 
   > div.j-select-content {

@@ -40,12 +40,12 @@ pub fn open_setting(app: &AppHandle) -> Result<(), Error> {
             window_label,
             WebviewUrl::App("/setting".into()),
         )
-        .transparent(true)
+        .transparent(false)
         .decorations(true)
         .title("设置")
         .inner_size(500.0, 600.0)
         .build()?;
-        window_effects::setup(&window);
+        // window_effects::setup(&window);
         register_window(app, &window);
     }
     Ok(())

@@ -113,7 +113,7 @@ const Select = <
     >
       <div className={'j-select-content'} data-set={{ empty: !value }}>
         {value ? (
-          <span data-set={{ placeholder: true }}>{current![labelKey]}</span>
+          <span data-set={{ placeholder: true }}>{current?.[labelKey]}</span>
         ) : (
           <span>{placeholder}</span>
         )}

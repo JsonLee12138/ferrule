@@ -58,7 +58,7 @@ function Setting() {
   });
 
   return (
-    <div className="w-full h-screen overflow-y-auto p-5 bg-white/30">
+    <div className="w-full h-screen overflow-y-auto p-5">
       <div className="flex items-center justify-center">
         <PiWarningDuotone color="#f59e0b" size={20} />
         <span className="ml-2 text-sm">
@@ -66,8 +66,8 @@ function Setting() {
         </span>
       </div>
       <h1 className="text-sm font-bold indent-2">翻译</h1>
-      <div className="border rounded bg-transparent px-2 mt-2 border-white/50">
-        <div className="flex items-center h-10 justify-between border-b-white/50 border-b">
+      <div className="border rounded bg-transparent px-2 mt-2 shadow-sm">
+        <div className="flex items-center h-10 justify-between border-b-stone-200 border-b">
           <div className="flex items-center py-2">
             <FaRegKeyboard className="mr-2" />
             <p className="text-sm ml-2">是否启用快捷键</p>
@@ -81,7 +81,7 @@ function Setting() {
             }
           />
         </div>
-        <div className="flex items-center h-10 justify-between border-b-white/50 border-b">
+        <div className="flex items-center h-10 justify-between border-b-stone-200 border-b">
           <div className="flex items-center py-2">
             <TbTableShortcut className="mr-2" />
             <p className="text-sm ml-2">键盘快捷键</p>
@@ -93,7 +93,7 @@ function Setting() {
             }
           />
         </div>
-        <div className="flex items-center h-10 justify-between border-b-white/50 border-b">
+        <div className="flex items-center h-10 justify-between border-b-stone-200 border-b">
           <div className="flex items-center py-2">
             <GrLanguage className="mr-2" />
             <p className="text-sm ml-2">主要语言</p>
@@ -115,8 +115,8 @@ function Setting() {
         </div>
       </div>
       <h1 className="text-sm font-bold indent-2 mt-5">JSON 编辑器</h1>
-      <div className="border rounded bg-transparent px-2 mt-2 border-white/50">
-        <div className="flex items-center h-10 justify-between border-b-white/50 border-b">
+      <div className="border rounded bg-transparent px-2 mt-2 shadow-sm">
+        <div className="flex items-center h-10 justify-between border-b-stone-200 border-b">
           <div className="flex items-center py-2">
             <FaRegKeyboard className="mr-2" />
             <p className="text-sm ml-2">是否启用快捷键</p>
@@ -128,7 +128,7 @@ function Setting() {
             onChange={(e) => setItem('json_editor::open_shortcut::enabled', e)}
           />
         </div>
-        <div className="flex items-center h-10 justify-between border-b-white/50 border-b">
+        <div className="flex items-center h-10 justify-between border-b-stone-200 border-b">
           <div className="flex items-center py-2">
             <TbTableShortcut className="mr-2" />
             <p className="text-sm ml-2">键盘快捷键</p>
@@ -140,7 +140,7 @@ function Setting() {
             }
           />
         </div>
-        <div className="flex items-center h-10 justify-between border-b-white/50 border-b">
+        <div className="flex items-center h-10 justify-between border-b-stone-200 border-b">
           <div className="flex items-center py-2">
             <TbTableShortcut className="mr-2" />
             <p className="text-sm ml-2">格式化代码快捷键</p>
@@ -152,7 +152,7 @@ function Setting() {
             }
           />
         </div>
-        <div className="flex items-center h-10 justify-between border-b-white/50 border-b">
+        <div className="flex items-center h-10 justify-between border-b-stone-200 border-b">
           <div className="flex items-center py-2">
             <TbTableShortcut className="mr-2" />
             <p className="text-sm ml-2">缩进字符</p>
@@ -160,7 +160,7 @@ function Setting() {
           <input
             value={getItem('json_editor::tab_size', '')}
             className={
-              'w-fit text-center pr-1.5 rounded-md py-1 focus:outline outline-indigo-600 bg-stone-100 text-[#333] text-sm/6 outline-[3px]'
+              'w-fit text-center pr-1.5 rounded-md py-1 focus:outline outline-indigo-600 bg-stone-200/60 text-[#333] text-sm/6 outline-[3px] hover:shadow'
             }
             onChange={handleJsonEditorTabSizeChange}
             onBlur={handleJsonEditorTabSizeBlur}
@@ -180,8 +180,8 @@ function Setting() {
         </div>
       </div>
       <h1 className="text-sm font-bold indent-2 mt-5">应用</h1>
-      <div className="border rounded bg-transparent px-2 mt-2 border-white/50">
-        <div className="flex items-center h-10 justify-between border-b-white/50 border-b">
+      <div className="border rounded bg-transparent px-2 mt-2 shadow-sm">
+        <div className="flex items-center h-10 justify-between border-b-stone-200 border-b">
           <div className="flex items-center py-2">
             <HiMiniArrowRightStartOnRectangle className="mr-2" />
             <p className="text-sm ml-2">是否开机自启</p>
@@ -193,7 +193,7 @@ function Setting() {
             onChange={(e) => setItem('system::start_at_login', e)}
           />
         </div>
-        <div className="flex items-center h-10 justify-between border-b-white/50 border-b">
+        <div className="flex items-center h-10 justify-between border-b-stone-200 border-b">
           <div className="flex items-center py-2">
             <PiSelectionBackgroundBold className="mr-2" />
             <p className="text-sm ml-2">是否静默启动</p>
