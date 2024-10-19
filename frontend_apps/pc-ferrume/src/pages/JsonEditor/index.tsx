@@ -52,9 +52,11 @@ import 'brace/theme/tomorrow';
 import 'brace/theme/twilight';
 import 'brace/theme/vibrant_ink';
 import 'brace/theme/xcode';
+import 'brace/snippets/json';
 import { useSetting } from '@/store/setting';
 import { objToJson } from '@/utils/obj';
 import { systemEmitter, SystemEvent } from '@/utils/sysEmitter';
+import { MdOutlineDriveFileMove } from "react-icons/md";
 
 interface ComponentWithRefProps {
   children: React.ReactNode;
@@ -108,8 +110,6 @@ function JsonEditor() {
 
   const handleChange = useCallback(() => {
     if (editor.current) {
-      // const value = editor.current.getValue();
-      // console.log(value, '>>>');
       setCopyState(CopyState.UNCOPY);
     }
   }, []);
@@ -166,6 +166,15 @@ function JsonEditor() {
     });
   }, []);
 
+  const handleSave = useCallback(()=> {
+    if (editor.current) {
+      const value = editor.current.getValue();
+      invoke('save_file', {
+        content: value
+      })
+    }
+  }, [])
+
   useEffect(() => {
     if (setting && editor.current) {
       loadTheme(settingItem('json_editor::theme')!);
@@ -174,7 +183,7 @@ function JsonEditor() {
         .setTabSize(settingItem('json_editor::tab_size'));
       const formatShortcut = settingItem(
         'json_editor::format_shortcut',
-      ).replace('+', '-');
+      ).replace(/\+/g, '-');
       editor.current.commands.addCommand({
         name: 'format',
         bindKey: { win: formatShortcut, mac: formatShortcut },
@@ -293,6 +302,15 @@ function JsonEditor() {
             </ComponentWithRef>
           </Tooltip>
         )}
+        <Tooltip title="保存">
+          <ComponentWithRef>
+            <MdOutlineDriveFileMove
+              className="cursor-pointer ml-2 hover:text-indigo-500"
+              onClick={handleSave}
+              size={22}
+            />
+          </ComponentWithRef>
+        </Tooltip>
       </div>
       <div
         ref={editorRef}

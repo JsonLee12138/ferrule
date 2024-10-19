@@ -16,7 +16,7 @@ pub fn open_translate(app: &AppHandle) -> Result<(), Error> {
             WebviewWindowBuilder::new(app, window_label, WebviewUrl::App("/translate".into()))
                 .transparent(true)
                 .decorations(false)
-                .inner_size(600.0, 600.0)
+                .inner_size(500.0, 600.0)
                 .title("翻译")
                 .center()
                 .build()?;

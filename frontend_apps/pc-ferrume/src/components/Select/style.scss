@@ -69,7 +69,7 @@
     }
 
     > input {
-      width: fit-content;
+      width: 100%;
       border-radius: 0.25rem;
       padding: 0.125rem 0.5rem;
       font-size: 0.875rem;
@@ -113,7 +113,7 @@
         position: relative;
         list-style: none;
 
-        &[data-checked] {
+        &[data-checked="true"] {
           &::before {
             content: '✓';
             position: absolute;
@@ -129,7 +129,7 @@
           background-color: #6366f1;
           color: #fff;
 
-          &[data-checked] {
+          &[data-checked="true"] {
             &::before {
               color: #fff;
             }

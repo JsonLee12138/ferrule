@@ -132,7 +132,7 @@ const Select = <
             const _label = item[labelKey];
             return (
               <li
-                data-set={{ checked: value === _value }}
+                data-checked={value === _value ? 'true' : 'false'}
                 key={_value}
                 value={_value}
                 onClick={() => handleChange(item, i)}

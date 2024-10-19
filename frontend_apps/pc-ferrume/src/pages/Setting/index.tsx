@@ -20,6 +20,9 @@ import { useSetting } from '@/store/setting';
 import { systemEmitter, SystemEvent } from '@/utils/sysEmitter';
 import { invoke } from '@tauri-apps/api/core';
 import { PiWarningDuotone } from 'react-icons/pi';
+import { AiOutlineFormatPainter } from "react-icons/ai";
+import { VscIndent } from "react-icons/vsc";
+import { MdOutlineWbSunny } from "react-icons/md";
 
 function Setting() {
   const [_, { setItem, getItem }] = useSetting();
@@ -142,7 +145,7 @@ function Setting() {
         </div>
         <div className="flex items-center h-10 justify-between border-b-stone-200 border-b">
           <div className="flex items-center py-2">
-            <TbTableShortcut className="mr-2" />
+            <AiOutlineFormatPainter className="mr-2" />
             <p className="text-sm ml-2">格式化代码快捷键</p>
           </div>
           <SetHotKey
@@ -154,7 +157,7 @@ function Setting() {
         </div>
         <div className="flex items-center h-10 justify-between border-b-stone-200 border-b">
           <div className="flex items-center py-2">
-            <TbTableShortcut className="mr-2" />
+            <VscIndent className="mr-2" />
             <p className="text-sm ml-2">缩进字符</p>
           </div>
           <input
@@ -168,7 +171,7 @@ function Setting() {
         </div>
         <div className="flex items-center h-10 justify-between">
           <div className="flex items-center py-2">
-            <TbTableShortcut className="mr-2" />
+            <MdOutlineWbSunny className="mr-2" />
             <p className="text-sm ml-2">编辑器主题</p>
           </div>
           <Select

@@ -10,6 +10,7 @@ use modules::setting::service::{get_os, get_setting, set_autostart, set_setting_
 use modules::translate::service::{translate};
 use std::env;
 use tauri_plugin_autostart::{MacosLauncher, ManagerExt};
+use modules::file::service::save_file;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -69,7 +70,8 @@ pub fn run() {
             get_setting,
             set_setting_item,
             set_clipboard,
-            set_autostart
+            set_autostart,
+            save_file,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
