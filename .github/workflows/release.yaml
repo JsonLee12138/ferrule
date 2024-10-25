@@ -21,9 +21,8 @@ jobs:
       - name: Extract tag version  # 提取标签版本
         id: extract_tag
         run: |
-          VERSION=${GITHUB_REF#refs/tags/}
-          echo "当前打包版本: $VERSION"
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "当前打包版本: ${{ env.VERSION }}"
+          echo "当前打包版本ref: ${{ github.ref }}"
 
       - name: Checkout code
         uses: actions/checkout@v4
