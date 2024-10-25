@@ -18,11 +18,13 @@ jobs:
         platform: [macos-latest, windows-latest]
     runs-on: ${{ matrix.platform }}
     steps:
-      - name: Extract tag version  # 提取标签版本
+      - name: Extract and print tag version
         id: extract_tag
         run: |
-          echo "当前打包版本: ${{ env.VERSION }}"
-          echo "当前打包版本ref: ${{ github.ref }}"
+          VERSION=${GITHUB_REF#refs/tags/}
+          echo "当前打包版本: $VERSION"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+        shell: bash
 
       - name: Checkout code
         uses: actions/checkout@v4
