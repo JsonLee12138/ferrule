@@ -18,6 +18,13 @@ jobs:
         platform: [macos-latest, windows-latest]
     runs-on: ${{ matrix.platform }}
     steps:
+      - name: Extract tag version  # 提取标签版本
+        id: extract_tag
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/}
+          echo "当前打包版本: $VERSION"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -38,6 +45,7 @@ jobs:
       - name: Build frontend
         run: |
           cd frontend_apps/pc-ferrume
+          echo "当前打包版本: ${{ env.VERSION }}"
           pnpm run build
 
       - name: Create release
@@ -45,10 +53,11 @@ jobs:
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERSION: ${{ github.ref }}
         with:
-          tagName: v__VERSION__
-          releaseName: 'v__VERSION__'
+          # tagName: v__VERSION__
+          tagName: v${{ env.VERSION }}
+          # releaseName: 'v__VERSION__'
+          releaseName: 'v${{ env.VERSION }}'
           releaseBody: 'See the assets to download and install this version.'
           releaseDraft: false
           prerelease: false
