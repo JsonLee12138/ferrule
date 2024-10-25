@@ -2,6 +2,7 @@ import { createBrowserRouter, RouteObject } from 'react-router-dom';
 import Setting from '@/pages/Setting';
 import JsonEditor from '@/pages/JsonEditor';
 import Translate from '@/pages/Translate';
+import URLDecode from '@/pages/URLDecode';
 
 const routes: RouteObject[] = [
   {
@@ -15,6 +16,10 @@ const routes: RouteObject[] = [
   {
     path: '/translate',
     element: <Translate />
+  },
+  {
+    path: 'url-decode',
+    element: <URLDecode />
   }
 ]
 

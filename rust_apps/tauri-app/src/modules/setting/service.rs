@@ -104,6 +104,16 @@ pub fn set_setting_item(
                 setting.json_editor.format_shortcut = v.to_string();
             }
         }
+        "url_decode::open_shortcut::enabled" => {
+            if let Some(v) = value.as_bool() {
+                setting.url_decode.open_shortcut.enabled = v;
+            }
+        }
+        "url_decode::open_shortcut::hotkey" => {
+            if let Some(v) = value.as_str() {
+                setting.url_decode.open_shortcut.hotkey = v.to_string();
+            }
+        }
         _ => panic!("Invalid key"),
     }
     store.set(

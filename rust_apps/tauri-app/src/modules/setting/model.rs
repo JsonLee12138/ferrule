@@ -78,6 +78,25 @@ fn get_target_language() -> String {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
+pub struct URLDecode {
+    #[serde(default = "default_url_decode_open_shortcut", rename = "openShortcut")]
+    pub open_shortcut: ShortcutItem,
+}
+
+fn default_url_decode_open_shortcut() -> ShortcutItem {
+    ShortcutItem {
+        enabled: true,
+        hotkey: "Alt+Shift+U".to_string(),
+    }
+}
+
+fn default_url_decode() -> URLDecode {
+    URLDecode {
+        open_shortcut: default_url_decode_open_shortcut(),
+    }
+}
+
+#[derive(Debug, Serialize, Deserialize)]
 pub struct System {
     #[serde(rename = "startAtLogin", default)]
     pub start_at_login: bool,
@@ -97,6 +116,8 @@ pub struct Setting {
     pub system: System,
     #[serde(default = "default_json_editor", rename = "jsonEditor")]
     pub json_editor: JSONEditor,
+    #[serde(default = "default_url_decode", rename = "urlDecode")]
+    pub url_decode: URLDecode,
 }
 
 fn default_system() -> System {
@@ -114,6 +135,7 @@ impl Default for Setting {
             translate: default_translate(),
             system: default_system(),
             json_editor: default_json_editor(),
+            url_decode: default_url_decode(),
         }
     }
 }

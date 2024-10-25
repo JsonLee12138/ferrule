@@ -15,20 +15,20 @@ pub fn setup(app: &tauri::App) -> Result<(), tauri::Error> {
     let translate_shortcut_key = setting.translate.shortcut.hotkey;
     let translate_shortcut_key =
         Shortcut::from_str(&translate_shortcut_key).expect("Invalid shortcut format");
+
     let json_shortcut_key = setting.json_editor.open_shortcut.hotkey;
     let json_shortcut_key =
         Shortcut::from_str(&json_shortcut_key).expect("Invalid shortcut format");
+    let url_decode_shortcut_key = setting.url_decode.open_shortcut.hotkey;
+    let url_decode_shortcut_key =
+        Shortcut::from_str(&url_decode_shortcut_key).expect("Invalid shortcut format");
     let mut shortcuts = HashMap::<HotKey, fn(&AppHandle) -> Result<(), tauri::Error>>::new();
     shortcuts.insert(translate_shortcut_key, translate_shortcut);
     shortcuts.insert(json_shortcut_key, json_shortcut);
+    shortcuts.insert(url_decode_shortcut_key, url_decode_shortcut);
     app.handle().plugin(
         Builder::new()
             .with_handler(move |_app, _key, _shortcut| {
-                // if _key == &translate_shortcut_key {
-                //     translate_shortcut(&_app).expect("Failed to open translate window");
-                // }else if _key == &json_shortcut_key {
-                //     json_shortcut(&_app).expect("Failed to open json window");
-                // }
                 if let Some(action) = shortcuts.get(&_key) {
                     action(&_app).expect("Failed to execute shortcut action");
                 }
@@ -47,6 +47,12 @@ pub fn setup(app: &tauri::App) -> Result<(), tauri::Error> {
             .register(json_shortcut_key)
             .map_err(|e| Error::from(std::io::Error::new(ErrorKind::Other, e.to_string())))?;
     }
+    let use_url_decode_hotkey = setting.url_decode.open_shortcut.enabled;
+    if use_url_decode_hotkey {
+        app.global_shortcut()
+            .register(url_decode_shortcut_key)
+            .map_err(|e| Error::from(std::io::Error::new(ErrorKind::Other, e.to_string())))?;
+    }
     Ok(())
 }
 
@@ -59,5 +65,10 @@ fn translate_shortcut(app: &tauri::AppHandle) -> Result<(), tauri::Error> {
 // json快捷键
 fn json_shortcut(app: &tauri::AppHandle) -> Result<(), tauri::Error> {
     windows::open_json(app)?;
+    Ok(())
+}
+
+fn url_decode_shortcut(app: &tauri::AppHandle) -> Result<(), tauri::Error> {
+    windows::open_url_decode(app)?;
     Ok(())
 }

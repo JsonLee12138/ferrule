@@ -314,7 +314,7 @@ function JsonEditor() {
       </div>
       <div
         ref={editorRef}
-        className="flex-1 hover:text-indigo-500"
+        className="flex-1"
         onInput={handleChange}
       />
     </div>

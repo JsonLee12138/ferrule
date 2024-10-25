@@ -1,19 +1,46 @@
-use std::fmt::format;
 use super::{nsapp, windows};
+use crate::modules::setting::service::get_setting;
 use tauri::{
     menu::{Menu, MenuItem},
     tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
     App, Manager,
 };
-use crate::modules::setting::service::get_setting;
 
 pub fn setup(app: &App) -> Result<(), tauri::Error> {
     let setting = get_setting(app.state());
-    let translate = MenuItem::with_id(app, "translate", format!("{} ({})", "翻译", setting.translate.shortcut.hotkey), true, None::<&str>)?;
-    let json_editor = MenuItem::with_id(app, "json_editor", format!("{} ({})", "Json 编辑器", setting.json_editor.open_shortcut.hotkey), true, None::<&str>)?;
+    let translate = MenuItem::with_id(
+        app,
+        "translate",
+        format!("{} ({})", "翻译", setting.translate.shortcut.hotkey),
+        true,
+        None::<&str>,
+    )?;
+    let json_editor = MenuItem::with_id(
+        app,
+        "json_editor",
+        format!(
+            "{} ({})",
+            "Json 编辑器", setting.json_editor.open_shortcut.hotkey
+        ),
+        true,
+        None::<&str>,
+    )?;
+    let url_decode = MenuItem::with_id(
+        app,
+        "url_decode",
+        format!(
+            "{} ({})",
+            "URL 解析器", setting.url_decode.open_shortcut.hotkey
+        ),
+        true,
+        None::<&str>,
+    )?;
     let setting = MenuItem::with_id(app, "setting", "设置", true, None::<&str>)?;
     let quit = MenuItem::with_id(app, "quit", "退出", true, None::<&str>)?;
-    let menu = Menu::with_items(app, &[&translate, &json_editor,&setting, &quit])?;
+    let menu = Menu::with_items(
+        app,
+        &[&translate, &json_editor, &url_decode, &setting, &quit],
+    )?;
     TrayIconBuilder::new()
         .icon(app.default_window_icon().unwrap().clone())
         .menu_on_left_click(false)
@@ -46,6 +73,7 @@ pub fn setup(app: &App) -> Result<(), tauri::Error> {
             "json_editor" => {
                 windows::open_json(app_handle).expect("open json_editor error");
             }
+            "url_decode" => windows::open_url_decode(app_handle).expect("open url decode error"),
             "setting" => {
                 windows::open_setting(app_handle).expect("open setting error");
             }

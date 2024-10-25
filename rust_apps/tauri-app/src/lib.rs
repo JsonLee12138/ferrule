@@ -7,7 +7,7 @@ use tauri_plugin_store::Store;
 use core::{global_shortcut, nsapp, store, tray, window_effects, windows::close_window};
 use modules::clipboard::service::set_clipboard;
 use modules::setting::service::{get_os, get_setting, set_autostart, set_setting_item};
-use modules::translate::service::{translate};
+use modules::translate::service::translate;
 use std::env;
 use tauri_plugin_autostart::{MacosLauncher, ManagerExt};
 use modules::file::service::save_file;

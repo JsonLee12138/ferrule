@@ -182,6 +182,33 @@ function Setting() {
           />
         </div>
       </div>
+      <h1 className="text-sm font-bold indent-2 mt-5">URL 解析器</h1>
+      <div className="border rounded bg-transparent px-2 mt-2 shadow-sm">
+        <div className="flex items-center h-10 justify-between border-b-stone-200 border-b">
+          <div className="flex items-center py-2">
+            <FaRegKeyboard className="mr-2" />
+            <p className="text-sm ml-2">是否启用快捷键</p>
+          </div>
+          <Switch<boolean>
+            value={getItem('url_decode::open_shortcut::enabled', false)}
+            checkedValue={true}
+            uncheckedValue={false}
+            onChange={(e) => setItem('url_decode::open_shortcut::enabled', e)}
+          />
+        </div>
+        <div className="flex items-center h-10 justify-between">
+          <div className="flex items-center py-2">
+            <TbTableShortcut className="mr-2" />
+            <p className="text-sm ml-2">键盘快捷键</p>
+          </div>
+          <SetHotKey
+            value={getItem('url_decode::open_shortcut::hotkey', '')}
+            onChange={(_, e: string) =>
+              setItem('url_decode::open_shortcut::hotkey', e)
+            }
+          />
+        </div>
+      </div>
       <h1 className="text-sm font-bold indent-2 mt-5">应用</h1>
       <div className="border rounded bg-transparent px-2 mt-2 shadow-sm">
         <div className="flex items-center h-10 justify-between border-b-stone-200 border-b">
