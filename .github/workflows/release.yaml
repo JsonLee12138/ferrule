@@ -56,9 +56,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           # tagName: v__VERSION__
-          tagName: v${{ env.VERSION }}
+          tagName: ${{ env.VERSION }}
           # releaseName: 'v__VERSION__'
-          releaseName: 'v${{ env.VERSION }}'
+          releaseName: '${{ env.VERSION }}'
           releaseBody: 'See the assets to download and install this version.'
           releaseDraft: false
           prerelease: false
