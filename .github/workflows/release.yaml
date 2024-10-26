@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        platform: [macos-latest, windows-latest]
+        platform: [windows-latest]
         # arch: [x64, arm64]  # macOS 支持多架构打包，Windows 只支持 x64
         # exclude:
         #   - platform: windows-latest
@@ -37,10 +37,6 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           version: 9
-
-      - name: Install Xcode CLI tools (macOS only)
-        if: matrix.platform == 'macos-latest'
-        run: xcode-select --install
 
       - name: Set up Rust
         uses: actions-rs/toolchain@v1
