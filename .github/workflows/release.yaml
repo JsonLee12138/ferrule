@@ -39,7 +39,7 @@ jobs:
           version: 9
 
       - name: Install Xcode CLI tools (macOS only)
-        if: matrix.os == 'macos-latest'
+        if: matrix.platform == 'macos-latest'
         run: xcode-select --install
 
       - name: Set up Rust
