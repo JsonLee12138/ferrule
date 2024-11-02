@@ -1,0 +1,37 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "tauri frontend dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "-F",
+        "pc-ferrume",
+        "run",
+        "dev"
+      ],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${file}"
+    },
+    {
+      "name": "tauri-app dev",
+      "type": "lldb",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/rust_apps/tauri-app",
+      "cargo": {
+        "args": [
+          "build",
+          "--manifest-path=./rust_apps/tauri-app/Cargo.toml",
+          "--no-default-features"
+        ],
+      }
+    }
+  ]
+}

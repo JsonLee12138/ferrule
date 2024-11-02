@@ -103,10 +103,9 @@ pub fn close_window(app: AppHandle, id: &str) -> Result<(), Error> {
 
 pub fn register_window(app: &AppHandle, window: &WebviewWindow) {
     let app_hanlde = app.clone();
-    window.on_window_event(move |e| match e {
-        WindowEvent::Destroyed => {
+    window.on_window_event(move |e| {
+        if let WindowEvent::Destroyed = e {
             nsapp::run_as_background(&app_hanlde);
         }
-        _ => {}
     });
 }

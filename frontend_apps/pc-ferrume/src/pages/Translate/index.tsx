@@ -114,7 +114,7 @@ function Translate() {
           onCompositionEnd={setComposition.setFalse}
         />
         <button
-          className="rounded py-2 px-4 text-sm hover:bg-indigo-500 hover:text-white active:bg-indigo-500 active:text-white disabled:bg-indigo-500 disabled:text-white outline-none"
+          className="rounded py-2 px-4 text-sm hover:bg-indigo-500 hover:text-white active:bg-indigo-500 active:text-white disabled:bg-indigo-500 disabled:text-white m-[1px] mr-0"
           onClick={handleSubmit}
           disabled={loading}
         >

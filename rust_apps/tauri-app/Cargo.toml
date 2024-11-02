@@ -27,6 +27,9 @@ tauri-plugin-store = "2.0.0-rc"
 sys-locale = "0.3.1"
 tauri-plugin-clipboard-manager = "2.0.1"
 tauri-plugin-dialog = "2.0.0-rc"
+json_core = { path = "../../rust_packages/core" }
+json-config = { path = "../../rust_packages/config" }
+lazy_static = "1.5.0"
 
 [target.'cfg(target_os = "macos")'.dependencies]
 cocoa = "0.26.0"

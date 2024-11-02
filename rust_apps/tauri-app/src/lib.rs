@@ -1,5 +1,6 @@
 mod core;
 mod modules;
+mod global;
 
 use tauri::{Manager, WindowEvent, Wry};
 use tauri_plugin_store::Store;
@@ -24,24 +25,26 @@ pub fn run() {
         .plugin(tauri_plugin_store::Builder::default().build())
         // .plugin(tauri_plugin_global_shortcut::Builder::new().build())
         .setup(|app| {
+            let cnf = global::CONFIG.read().unwrap();
+            println!("authkey: {}", cnf.deepl.auth_key);
             let main_window = app.get_webview_window("main").unwrap();
-            let app_handle: &tauri::AppHandle = app.handle();
+            let app_handle = app.handle();
             // main_window.hide().unwrap();
             // nsapp::run_as_background(&app_handle);
-            store::setup(&app)?;
+            store::setup(app)?;
             let store = app.state::<Store<Wry>>();
             // store.clear();
             // store.save()?;
             window_effects::setup(&main_window);
-            global_shortcut::setup(&app)?;
+            global_shortcut::setup(app)?;
             let setting = get_setting(store);
             if setting.system.show_tray_icon {
-                tray::setup(&app)?;
+                tray::setup(app)?;
             }
             let args: Vec<String> = env::args().collect();
             if args.contains(&"--auto-launch".to_string()) && setting.system.silent_start {
                 main_window.hide().unwrap();
-                nsapp::run_as_background(&app_handle);
+                nsapp::run_as_background(app_handle);
             }
             let app_handle_clone = app_handle.clone();
             let main_window_clone = main_window.clone();

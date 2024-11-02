@@ -4,7 +4,7 @@
   "version": "0.1.1",
   "identifier": "com.json-ferrume.app",
   "build": {
-    "devUrl": "http://localhost:3000",
+    "devUrl": "https://www.reddit.com",
     "frontendDist": "../../frontend_apps/pc-ferrume/dist"
   },
   "app": {

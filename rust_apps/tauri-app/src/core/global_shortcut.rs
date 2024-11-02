@@ -29,8 +29,8 @@ pub fn setup(app: &tauri::App) -> Result<(), tauri::Error> {
     app.handle().plugin(
         Builder::new()
             .with_handler(move |_app, _key, _shortcut| {
-                if let Some(action) = shortcuts.get(&_key) {
-                    action(&_app).expect("Failed to execute shortcut action");
+                if let Some(action) = shortcuts.get(_key) {
+                    action(_app).expect("Failed to execute shortcut action");
                 }
             })
             .build(),

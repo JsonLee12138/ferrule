@@ -21,11 +21,10 @@ pub fn get_os() -> &'static str {
 
 #[command]
 pub fn get_setting(store: State<'_, Store<Wry>>) -> Setting {
-    let setting = match store.get("setting") {
+    match store.get("setting") {
         Some(s) => serde_json::from_value(s).unwrap_or_default(),
         None => Setting::default(),
-    };
-    setting
+    }
 }
 
 #[command]

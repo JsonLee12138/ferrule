@@ -4,6 +4,13 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+lazy_static = "1.5.0"
 
 [workspace]
-members = ["rust_apps/tauri-app"]
+members = ["rust_apps/tauri-app", "rust_packages/config", "rust_packages/core"]
+
+[profile.dev]
+incremental = true
+
+[build]
+incremental = true

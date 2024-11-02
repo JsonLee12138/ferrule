@@ -19,7 +19,7 @@ pub fn run_as_background(app: &AppHandle) {
         }
     }
     println!("windows: {:?}", windows_visible.len());
-    if windows_visible.len() > 0 {
+    if windows_visible.is_empty() {
         return;
     }
     // if let Some(window) = windows_visible.first() {

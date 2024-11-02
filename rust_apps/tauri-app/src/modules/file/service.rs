@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::Write;
-use tauri_plugin_dialog::{DialogExt, FileDialogBuilder};
-use tauri::{Manager, command, AppHandle};
+use tauri::{command, AppHandle};
+use tauri_plugin_dialog::DialogExt;
 
 #[command]
 pub fn save_file(app: AppHandle, content: String) {
@@ -9,7 +9,9 @@ pub fn save_file(app: AppHandle, content: String) {
     //     println!("{:?}", file_path);
     // });
     let b = content.clone().into_bytes();
-    app.dialog().file().set_title("保存 json 文件")
+    app.dialog()
+        .file()
+        .set_title("保存 json 文件")
         .add_filter("JSON 文件".to_string(), &["json"])
         .save_file(move |file_path| {
             println!("{:?}", file_path);

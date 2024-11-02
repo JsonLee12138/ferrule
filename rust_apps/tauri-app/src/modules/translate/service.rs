@@ -1,7 +1,7 @@
 use super::super::setting::model::Setting;
 use super::model::{DeepLResponse, TranslateBody};
 use super::utils::deepl;
-use tauri::{command, Manager, State, Window, Wry};
+use tauri::{command, State, Wry};
 use tauri_plugin_store::Store;
 
 #[command]
