@@ -1,17 +1,18 @@
 mod core;
-mod modules;
 mod global;
+mod modules;
 
 use tauri::{Manager, WindowEvent, Wry};
 use tauri_plugin_store::Store;
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 use core::{global_shortcut, nsapp, store, tray, window_effects, windows::close_window};
+use modules::ast::service::json_to_ts_interface;
 use modules::clipboard::service::set_clipboard;
+use modules::file::service::save_file;
 use modules::setting::service::{get_os, get_setting, set_autostart, set_setting_item};
 use modules::translate::service::translate;
 use std::env;
 use tauri_plugin_autostart::{MacosLauncher, ManagerExt};
-use modules::file::service::save_file;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -23,10 +24,9 @@ pub fn run() {
             Some(vec!["--auto-launch"]),
         ))
         .plugin(tauri_plugin_store::Builder::default().build())
-        // .plugin(tauri_plugin_global_shortcut::Builder::new().build())
         .setup(|app| {
-            let cnf = global::CONFIG.read().unwrap();
-            println!("authkey: {}", cnf.deepl.auth_key);
+            let cnf = global::AppConfig::init(app).unwrap();
+            app.manage(cnf);
             let main_window = app.get_webview_window("main").unwrap();
             let app_handle = app.handle();
             // main_window.hide().unwrap();
@@ -75,6 +75,7 @@ pub fn run() {
             set_clipboard,
             set_autostart,
             save_file,
+            json_to_ts_interface
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

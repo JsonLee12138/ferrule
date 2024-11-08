@@ -1,4 +1,4 @@
-mod deepl;
 mod config;
+mod deepl;
 
-pub use config::Config;
+pub use config::AppConfig;

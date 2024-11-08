@@ -1,4 +1,3 @@
 mod lib;
 pub mod models;
-
-pub use lib::CONFIG;
+pub use models::AppConfig;

@@ -1,16 +1,16 @@
-use crate::global;
+use std::sync::Arc;
+
+use crate::global::AppConfig;
 
 use super::model::{DeepLResponse, TranslateBody};
 use tauri::http::{HeaderMap, HeaderValue};
+use tauri::{AppHandle, Manager};
 
-pub async fn deepl(opt: TranslateBody) -> Result<DeepLResponse, String> {
+pub async fn deepl(app_handle: &AppHandle, opt: TranslateBody) -> Result<DeepLResponse, String> {
     let client = reqwest::Client::new();
-
+    let cnf = app_handle.state::<Arc<AppConfig>>();
     let mut headers = HeaderMap::new();
-    let cnf_clone = global::CONFIG.clone();
-    // let deepl_key = format!("DeepL-Auth-Key {}", cnf.deepl.auth_key.clone());
     let deepl_key = {
-        let cnf = cnf_clone.read().map_err(|e| format!("Read config error: {}", e))?;
         let key = format!("DeepL-Auth-Key {}", cnf.deepl.auth_key);
         key
     };
