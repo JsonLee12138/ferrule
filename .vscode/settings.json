@@ -1,0 +1,8 @@
+{
+  "i18n-ally.localesPaths": ["frontend_apps/json-admin/src/locale"],
+  "i18n-ally.enabledParsers": ["json"],
+  "i18n-ally.extract.keygenStyle": "camelCase",
+  "i18n-ally.sortKeys": true,
+  "i18n-ally.sourceLanguage": "zh-CN",
+  "i18n-ally.keystyle": "nested"
+}

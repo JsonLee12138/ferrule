@@ -1,0 +1,127 @@
+{
+  "title": "Json Admin",
+  "newSession": "新建文档",
+  "loading": "加载中...",
+  "placeholder": {
+    "searchSession": "搜索文档...",
+    "mainSearch": "请输入",
+    "question": "在这里输入您要查询的问题!",
+    "selectIcons": "请输入图标name"
+  },
+  "request": {
+    "timeout": "请求超时! 请您稍后重试",
+    "networkError": "网络错误! 请您稍后重试",
+    "400": "请求失败! 请您稍后重试",
+    "401": "登录失效! 请您重新登录",
+    "403": "当前账号无权限访问! ",
+    "404": "你所访问的资源不存在! ",
+    "405": "请求方式错误! 请您稍后重试",
+    "408": "请求超时! 请您稍后重试",
+    "500": "服务异常! ",
+    "502": "网管错误! ",
+    "503": "服务不可用! ",
+    "504": "网关超时! ",
+    "otherError": "请求失败! "
+  },
+  "404": {
+    "title": "当前页面未找到!",
+    "subTitle": "抱歉，我们找不到您要找的页面。"
+  },
+  "403": {
+    "title": "当前页面无权限!",
+    "subTitle": "对不起，您没有访问当前页面的权限。"
+  },
+  "menus": {
+    "system": "系统配置",
+    "menu": "菜单管理",
+    "role": "角色管理",
+    "user": "用户管理",
+    "dic": "字典管理"
+  },
+  "signIn": {
+    "title": "Json Admin",
+    "subTitle": "欢迎使用 Json Admin 后台管理系统，请登录! ",
+    "type": {
+      "phone": "手机号",
+      "email": "邮箱",
+      "account": "账号"
+    },
+    "label": {
+      "account": "账号",
+      "password": "密码",
+      "code": "验证码",
+      "remember": "记住密码"
+    },
+    "placeholder": {
+      "phone": "请输入手机号码",
+      "email": "邮箱",
+      "captcha": "验证码",
+      "account": "请输入账号",
+      "password": "请输入密码",
+      "code": "请输入验证码"
+    },
+    "hint": {
+      "phone": "请输入正确的手机号",
+      "email": "请输入正确的邮箱",
+      "captcha": "请输入验证码",
+      "account": "请输入账号",
+      "password": "请输入密码",
+      "code": "请输入验证码",
+      "valid": "请先完成图像验证"
+    },
+    "protocol": "登录即代表同意{__1}和{__2}",
+    "serviceAgreement": "登录协议",
+    "privacyAgreement": "隐私协议"
+  },
+  "btn": {
+    "sendCaptcha": "发送验证码",
+    "forgotPassword": "忘记密码？",
+    "signIn": "登录",
+    "valid": "点击验证",
+    "ok": "确定",
+    "cancel": "取消",
+    "del": "删除",
+    "document": "文档",
+    "group": "分组",
+    "additional": "新增",
+    "signout": "退出登陆",
+    "add": "新增",
+    "update": "修改",
+    "backHome": "返回首页"
+  },
+  "hint": {
+    "errorEmail": "请输入正确的邮箱!",
+    "delete": "确认要删除当前项吗？"
+  },
+  "selectIcons": {
+    "title": "图标库"
+  },
+  "show": "显示",
+  "hide": "隐藏",
+  "tableHeader": {
+    "control": "操作"
+  },
+  "menu": {
+    "add": "新增菜单",
+    "update": "修改菜单",
+    "delete": "删除菜单",
+    "addSubMenu": "添加子菜单",
+    "addRootMenu": "添加根菜单",
+    "asyncRoute": "同步本地路由",
+    "addChild": "添加子菜单",
+    "th": {
+      "title": "标题",
+      "icon": "图标",
+      "name": "路由别名",
+      "path": "路由路径",
+      "hidden": "是否隐藏",
+      "parentId": "上级菜单"
+    },
+    "placeholder": {
+      "title": "请输入标题",
+      "icon": "请输入图标",
+      "name": "请输入路由别名",
+      "path": "请输入路由路径"
+    }
+  }
+}

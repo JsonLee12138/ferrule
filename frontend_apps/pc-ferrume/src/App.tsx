@@ -5,8 +5,9 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import { RouterProvider } from 'react-router';
 import router from '@/router';
 import { RecoilRoot } from 'recoil';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { systemEmitter, SystemEvent } from './utils/sysEmitter';
+import FullScreenLoading from './components/FullScreenLoading';
 
 const theme = createTheme({
   palette: {
@@ -39,7 +40,15 @@ const App = () => {
   return (
     <RecoilRoot>
       <ThemeProvider theme={theme}>
-        <RouterProvider router={router} />
+        <Suspense
+          fallback={
+            <div className="w-screen h-screen flex items-center justify-center bg-white dark:bg-black">
+              <FullScreenLoading />
+            </div>
+          }
+        >
+          <RouterProvider router={router} />
+        </Suspense>
       </ThemeProvider>
     </RecoilRoot>
   );

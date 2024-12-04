@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.ce-toolbar{
+  right: auto;
+}
+.ce-block{
+  // @apply pl-[100px];
+}
+
+
+.j-code-container {
+  @apply w-full rounded p-2 shadow bg-stone-100;
+}
+
+// .j-select-container {
+//   @apply flex items-center rounded-sm p-1 mb-1 cursor-pointer relative;
+//   &:hover {
+//     @apply bg-stone-200;
+//   }
+
+//   >select {
+//     @apply block appearance-none rounded border-none text-sm text-black *:text-black w-fit cursor-pointer focus:outline-none bg-transparent;
+
+//     >option {
+//       @apply hover:bg-indigo-500 checked:bg-indigo-500;
+//     }
+//   }
+
+//   >svg {
+//     @apply pointer-events-none absolute right-1 size-4 fill-white/60 text-gray-500 ml-1;
+//   }
+// }
+
+.inherit-height {
+  height: inherit !important;
+}
+
+.j-copy-btn {
+  @apply cursor-pointer p-1 rounded-sm;
+  &:hover {
+    transform: translateY(-2px);
+  }
+  &:active {
+    transform: translateY(0px);
+  }
+}

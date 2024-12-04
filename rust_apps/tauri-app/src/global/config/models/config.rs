@@ -23,7 +23,7 @@ impl AppConfig {
                     format!("获取配置文件目录失败:{}", e),
                 )
             })?;
-        let config = load_from_path_as::<AppConfig>(&source_path)?;
+        let config = load_from_path_as::<Self>(&source_path)?;
         Ok(Arc::new(config))
     }
 }

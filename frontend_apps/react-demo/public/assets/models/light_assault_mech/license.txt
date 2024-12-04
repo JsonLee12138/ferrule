@@ -1,0 +1,11 @@
+Model Information:
+* title:	Light Assault Mech
+* source:	https://sketchfab.com/3d-models/light-assault-mech-d1ca5065b5184646bc7028597d0ce049
+* author:	Lagst (https://sketchfab.com/Lagst)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Light Assault Mech" (https://sketchfab.com/3d-models/light-assault-mech-d1ca5065b5184646bc7028597d0ce049) by Lagst (https://sketchfab.com/Lagst) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

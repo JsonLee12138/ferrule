@@ -13,7 +13,7 @@ import { FaRegCircleCheck } from 'react-icons/fa6';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { invoke } from '@tauri-apps/api/core';
 import { CopyState } from '@/enum/copy';
-import { aceThemes } from '@/constant/aceTheme';
+import type { aceThemes } from '@/constant/aceTheme';
 import { Tooltip } from '@mui/material';
 import 'brace/theme/ambiance';
 import 'brace/theme/chaos';
@@ -56,7 +56,8 @@ import 'brace/snippets/json';
 import { useSetting } from '@/store/setting';
 import { objToJson } from '@/utils/obj';
 import { systemEmitter, SystemEvent } from '@/utils/sysEmitter';
-import { MdOutlineDriveFileMove } from "react-icons/md";
+import { MdOutlineDriveFileMove } from 'react-icons/md';
+import { TbBrandTypescript } from 'react-icons/tb';
 
 interface ComponentWithRefProps {
   children: React.ReactNode;
@@ -65,7 +66,7 @@ interface ComponentWithRefProps {
 const ComponentWithRef = forwardRef<HTMLDivElement, ComponentWithRefProps>(
   ({ children, ...props }, ref) => {
     return (
-      <div className='w-fit' {...props} ref={ref}>
+      <div className="w-fit" {...props} ref={ref}>
         {children}
       </div>
     );
@@ -79,9 +80,9 @@ const isDarkColor = (color: string) => {
   if (color.startsWith('#')) {
     const hex = color.slice(1);
     rgbArray = [
-      parseInt(hex.slice(0, 2), 16),
-      parseInt(hex.slice(2, 4), 16),
-      parseInt(hex.slice(4, 6), 16),
+      Number.parseInt(hex.slice(0, 2), 16),
+      Number.parseInt(hex.slice(2, 4), 16),
+      Number.parseInt(hex.slice(4, 6), 16),
     ];
   } else if (color.startsWith('rgba')) {
     rgbArray = color.match(/\d+/g)?.slice(0, 3).map(Number);
@@ -100,6 +101,9 @@ function JsonEditor() {
   const editor = useRef<ace.Editor | null>(null);
   const [editable, setEditable] = useBoolean(true);
   const [copyState, setCopyState] = useSafeState<CopyState>(CopyState.UNCOPY);
+  const [tsCopyState, setTsCopyState] = useSafeState<CopyState>(
+    CopyState.UNCOPY,
+  );
   const [toolbarBgColor, setToolbarBgColor] = useSafeState<string>('');
   const [toolbarBorderColor, setToolbarBorderColor] = useSafeState<string>('');
   const [setting, { getItem: settingItem }] = useSetting();
@@ -111,6 +115,7 @@ function JsonEditor() {
   const handleChange = useCallback(() => {
     if (editor.current) {
       setCopyState(CopyState.UNCOPY);
+      setTsCopyState(CopyState.UNCOPY);
     }
   }, []);
 
@@ -124,6 +129,19 @@ function JsonEditor() {
     },
     [settingItem],
   );
+
+  const safeJsonFormat = useCallback(
+    (value: string) => {
+      try {
+        const formattedJson = jsonFormat(value);
+        return formattedJson;
+      } catch {
+        const formattedJson = jsonFormat(objToJson(value));
+        return formattedJson;
+      }
+    },
+    [jsonFormat],
+  );
   const handleFormat = useCallback(() => {
     if (editor.current) {
       const value = editor.current.getValue();
@@ -131,7 +149,7 @@ function JsonEditor() {
         const formattedJson = jsonFormat(value);
         editor.current.setValue(formattedJson, -1);
       } catch {
-        const formattedJson = objToJson(objToJson(value));
+        const formattedJson = jsonFormat(objToJson(value));
         editor.current.setValue(formattedJson, -1);
       }
     }
@@ -154,6 +172,34 @@ function JsonEditor() {
     }
   }, []);
 
+  // const objToInterface = useCallback((obj: AnyObject)=> {
+  //   for (const key in obj) {
+  //     if (Object.prototype.hasOwnProperty.call(obj, key)) {
+  //       const val = obj[key];
+
+  //     }
+  //   }
+  // }, [])
+
+  const handleTSCopy = useCallback(async () => {
+    if (editor.current) {
+      try {
+        const value = editor.current.getValue();
+        const formattedJson = safeJsonFormat(value);
+        console.log(formattedJson, '>>>');
+        const tsInterface = await invoke('json_to_ts_interface', {
+          jsonData: formattedJson,
+        });
+        console.log(tsInterface, 'interface');
+        await invoke('set_clipboard', { text: tsInterface });
+        setTsCopyState(CopyState.COPY_SUCCESS);
+      } catch (error) {
+        setTsCopyState(CopyState.COPY_FAILED);
+        console.error(error);
+      }
+    }
+  }, []);
+
   const loadTheme = useCallback(async (_theme: (typeof aceThemes)[number]) => {
     editor.current?.setTheme(`ace/theme/${_theme}`);
     requestAnimationFrame(() => {
@@ -166,14 +212,14 @@ function JsonEditor() {
     });
   }, []);
 
-  const handleSave = useCallback(()=> {
+  const handleSave = useCallback(() => {
     if (editor.current) {
       const value = editor.current.getValue();
       invoke('save_file', {
-        content: value
-      })
+        content: value,
+      });
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (setting && editor.current) {
@@ -208,14 +254,14 @@ function JsonEditor() {
       editor.current.getSession().setUseSoftTabs(true);
       editor.current.setShowPrintMargin(true);
       editor.current.setPrintMarginColumn(90);
-      editor.current.$blockScrolling = Infinity;
+      editor.current.$blockScrolling = Number.POSITIVE_INFINITY;
       editor.current.focus();
     }
-    systemEmitter.on(SystemEvent.ESC, ()=> {
+    systemEmitter.on(SystemEvent.ESC, () => {
       invoke('close_window', {
-        id: 'json_editor'
-      })
-    })
+        id: 'json_editor',
+      });
+    });
     return () => {
       if (editor.current) {
         editor.current.destroy();
@@ -224,7 +270,7 @@ function JsonEditor() {
     };
   }, []);
   return (
-    <div className='h-screen w-screen flex flex-col overflow-hidden'>
+    <div className="h-screen w-screen flex flex-col overflow-hidden">
       <div
         className="flex py-2 px-4 shadow bg-stone-200 items-center border-b"
         style={{
@@ -311,12 +357,38 @@ function JsonEditor() {
             />
           </ComponentWithRef>
         </Tooltip>
+        {tsCopyState === CopyState.COPY_SUCCESS ? (
+          <Tooltip title="复制成功">
+            <ComponentWithRef>
+              <FaRegCircleCheck
+                className="cursor-pointer ml-2 hover:text-indigo-500"
+                size={18}
+              />
+            </ComponentWithRef>
+          </Tooltip>
+        ) : tsCopyState === CopyState.COPY_FAILED ? (
+          <Tooltip title="重新复制">
+            <ComponentWithRef>
+              <AiOutlineCloseCircle
+                className="cursor-pointer ml-2 hover:text-indigo-500"
+                onClick={handleTSCopy}
+                size={20}
+              />
+            </ComponentWithRef>
+          </Tooltip>
+        ) : (
+          <Tooltip title="复制 TS 类型">
+            <ComponentWithRef>
+              <TbBrandTypescript
+                className="cursor-pointer ml-2 hover:text-indigo-500"
+                onClick={handleTSCopy}
+                size={20}
+              />
+            </ComponentWithRef>
+          </Tooltip>
+        )}
       </div>
-      <div
-        ref={editorRef}
-        className="flex-1"
-        onInput={handleChange}
-      />
+      <div ref={editorRef} className="flex-1" onInput={handleChange} />
     </div>
   );
 }

@@ -1,0 +1,38 @@
+{
+  "title": "Json Admin",
+  "newSession": "新建文档",
+  "placeholder": {
+    "searchSession": "搜索文档...",
+    "mainSearch": "请输入",
+    "question": "在这里输入您要查询的问题!"
+  },
+  "signIn": {
+    "title": "登录",
+    "type": {
+      "phone": "手机号",
+      "email": "邮箱"
+    },
+    "placeholder": {
+      "phone": "请输入手机号码",
+      "email": "邮箱",
+      "captcha": "验证码"
+    },
+    "protocol": "登录即代表同意{__1}和{__2}",
+    "serviceAgreement": "登录协议",
+    "privacyAgreement": "隐私协议"
+  },
+  "btn": {
+    "sendCaptcha": "发送验证码",
+    "signIn": "登录",
+    "ok": "确定",
+    "cancel": "取消",
+    "del": "删除",
+    "document": "文档",
+    "group": "分组",
+    "additional": "新增",
+    "signout": "Sign out"
+  },
+  "hint": {
+    "errorEmail": "请输入正确的邮箱!"
+  }
+}

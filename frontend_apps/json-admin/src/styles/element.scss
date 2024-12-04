@@ -1,0 +1,33 @@
+@import url('./tailwind.css');
+
+.el-menu-item {
+  @apply rounded mt-0.5;
+
+  &.is-active {
+    background-color: var(--el-color-primary-light-8);
+  }
+}
+
+.el-sub-menu {
+  &.is-active {
+    >.el-sub-menu__title {
+      color: var(--el-color-primary);
+    }
+  }
+}
+
+.j-menu-collapsed {
+  --el-menu-base-level-padding: 0;
+
+  .el-menu-tooltip__trigger {
+    @apply justify-center;
+  }
+
+  .el-sub-menu__title {
+    @apply justify-center;
+  }
+}
+
+.el-menu--popup {
+  padding: 0.5rem !important;
+}

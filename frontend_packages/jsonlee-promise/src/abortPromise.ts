@@ -51,6 +51,7 @@ export const abortPromise = <T>(executor:
         case 'promise':
           return promise;
         case 'then':
+          // biome-ignore lint/suspicious/noExplicitAny: <explanation>
           return (...args: any[]) => {
             return target.then(...args);
           }

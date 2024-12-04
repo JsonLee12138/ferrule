@@ -12,5 +12,12 @@ export default defineConfig({
   server: {
     open: false
   },
-  root: './'
+  root: './',
+  output: {
+    cssModules: {
+      auto: (resource) => {
+        return resource.includes('.module.');
+      },
+    },
+  }
 });

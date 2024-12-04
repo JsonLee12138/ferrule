@@ -1,0 +1,11 @@
+Model Information:
+* title:	Man
+* source:	https://sketchfab.com/3d-models/man-568a4d4d287449c49ac85800d2e239de
+* author:	savounited (https://sketchfab.com/savounited)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Man" (https://sketchfab.com/3d-models/man-568a4d4d287449c49ac85800d2e239de) by savounited (https://sketchfab.com/savounited) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

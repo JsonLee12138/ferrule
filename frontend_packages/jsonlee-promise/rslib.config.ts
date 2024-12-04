@@ -5,12 +5,17 @@ export default defineConfig({
     {
       format: 'esm',
       syntax: 'es2021',
-      dts: true,
+      dts: {
+        distPath: "types"
+      },
     },
     {
       format: 'cjs',
       syntax: 'es2021',
-    },
+    }
   ],
   output: { target: 'node' },
+  plugins: [
+    // new rspack
+  ]
 });

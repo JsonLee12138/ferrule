@@ -1,0 +1,11 @@
+Model Information:
+* title:	Man base mesh
+* source:	https://sketchfab.com/3d-models/man-base-mesh-a870a28384fb428da535b6a816fea73e
+* author:	BlakkMato (https://sketchfab.com/BlakkMato)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Man base mesh" (https://sketchfab.com/3d-models/man-base-mesh-a870a28384fb428da535b6a816fea73e) by BlakkMato (https://sketchfab.com/BlakkMato) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

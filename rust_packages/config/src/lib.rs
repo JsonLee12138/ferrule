@@ -1,6 +1,3 @@
-mod enums;
-mod file;
-
 use std::{
     env,
     io::{Error, ErrorKind, Result},
@@ -10,8 +7,10 @@ use std::{
 use config::{Config, File};
 use serde::de::DeserializeOwned;
 
-pub use enums::EnvMode;
-pub use file::{__dirname, resolve};
+pub use json_utils::{
+    env_mode::EnvMode,
+    file::{__dirname, resolve},
+};
 
 pub fn load_from_path(base_path: &PathBuf) -> Result<Config> {
     let env_str = env::var("ENV_MODE").unwrap_or_else(|_| "dev".into());
