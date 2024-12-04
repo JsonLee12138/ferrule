@@ -11,3 +11,6 @@ node_modules
 *.local.*
 *.local
 .DS_Store
+*.lock
+*.lockb
+*-lock.*

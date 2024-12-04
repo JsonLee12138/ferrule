@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build:editorjs": "pnpm -F @json_lee12138/editorjs-react run build",
+    "build:ferrume": "pnpm -F pc-ferrume run build",
+    "build:all": "pnpm run build:editorjs && pnpm run build:ferrume",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

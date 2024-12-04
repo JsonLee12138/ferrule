@@ -47,11 +47,16 @@ jobs:
         run: |
           pnpm install
 
+      # - name: Build frontend
+      #   run: |
+      #     cd frontend_apps/pc-ferrume
+      #     echo "当前打包版本: ${{ env.VERSION }}"
+      #     pnpm run build
+
       - name: Build frontend
         run: |
-          cd frontend_apps/pc-ferrume
           echo "当前打包版本: ${{ env.VERSION }}"
-          pnpm run build
+          pnpm run build:all
 
       - name: Create release
         id: create_release
