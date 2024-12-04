@@ -10,3 +10,4 @@ node_modules
 
 *.local.*
 *.local
+.DS_Store

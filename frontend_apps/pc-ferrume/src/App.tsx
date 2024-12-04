@@ -8,6 +8,7 @@ import { RecoilRoot } from 'recoil';
 import { Suspense, useEffect } from 'react';
 import { systemEmitter, SystemEvent } from './utils/sysEmitter';
 import FullScreenLoading from './components/FullScreenLoading';
+import useLoadingDelay from './hooks/useLoadingDelay';
 
 const theme = createTheme({
   palette: {
@@ -18,6 +19,7 @@ const theme = createTheme({
 });
 
 const App = () => {
+  const [ready] = useLoadingDelay(800);
   useEffect(() => {
     let isComposing = false;
     window.addEventListener('compositionstart', () => {
@@ -40,13 +42,8 @@ const App = () => {
   return (
     <RecoilRoot>
       <ThemeProvider theme={theme}>
-        <Suspense
-          fallback={
-            <div className="w-screen h-screen flex items-center justify-center bg-white dark:bg-black">
-              <FullScreenLoading />
-            </div>
-          }
-        >
+        {!ready && <FullScreenLoading />}
+        <Suspense>
           <RouterProvider router={router} />
         </Suspense>
       </ThemeProvider>
