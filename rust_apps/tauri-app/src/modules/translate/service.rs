@@ -1,3 +1,5 @@
+use std::sync::Arc;
+
 use super::super::setting::model::Setting;
 use super::model::{DeepLResponse, TranslateBody};
 use super::utils::deepl;
@@ -6,7 +8,7 @@ use tauri_plugin_store::Store;
 
 #[command]
 pub async fn translate(app_handle: AppHandle, text: Vec<String>) -> Result<DeepLResponse, String> {
-    let store = app_handle.state::<Store<Wry>>();
+    let store = app_handle.state::<Arc<Store<Wry>>>();
     let setting: Setting = match store.get("setting") {
         Some(s) => serde_json::from_value(s).unwrap_or_default(),
         None => Setting::default(),

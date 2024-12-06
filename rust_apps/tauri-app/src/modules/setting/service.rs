@@ -1,3 +1,5 @@
+use std::sync::Arc;
+
 use tauri::{command, State, Wry};
 use tauri_plugin_store::Store;
 
@@ -20,7 +22,7 @@ pub fn get_os() -> &'static str {
 }
 
 #[command]
-pub fn get_setting(store: State<'_, Store<Wry>>) -> Setting {
+pub fn get_setting(store: State<'_, Arc<Store<Wry>>>) -> Setting {
     match store.get("setting") {
         Some(s) => serde_json::from_value(s).unwrap_or_default(),
         None => Setting::default(),
@@ -29,7 +31,7 @@ pub fn get_setting(store: State<'_, Store<Wry>>) -> Setting {
 
 #[command]
 pub fn set_setting_item(
-    store: State<'_, Store<Wry>>,
+    store: State<'_, Arc<Store<Wry>>>,
     key: &str,
     value: serde_json::Value,
 ) -> Setting {
@@ -125,7 +127,7 @@ pub fn set_setting_item(
 
 #[command]
 pub fn set_autostart(
-    store: State<'_, Store<Wry>>,
+    store: State<'_, Arc<Store<Wry>>>,
     auto_manager: State<'_, tauri_plugin_autostart::AutoLaunchManager>,
     value: bool,
 ) {

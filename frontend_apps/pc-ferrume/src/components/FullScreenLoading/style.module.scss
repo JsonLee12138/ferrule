@@ -25,10 +25,10 @@
 
 @media (prefers-color-scheme: dark) {
   .loader {
-    color: #fff;
+    color: #fff0;
     -webkit-text-stroke: 1px #fff;
     background:
-    radial-gradient(1.13em at 50% 1.6em, #fff 99%, #fff 101%) calc(50% - 1.6em) 0/3.2em 100% text,
-    radial-gradient(1.13em at 50% -0.8em, #fff 99%, #fff 101%) 50% .8em/3.2em 100% repeat-x text;
+      radial-gradient(1.13em at 50% 1.6em, #fff 99%, #fff0 101%) calc(50% - 1.6em) 0/3.2em 100% text,
+      radial-gradient(1.13em at 50% -0.8em, #fff0 99%, #fff 101%) 50% .8em/3.2em 100% repeat-x text;
   }
 }

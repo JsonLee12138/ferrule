@@ -3,39 +3,41 @@ mod global;
 mod modules;
 
 use tauri::{Manager, WindowEvent, Wry};
-use tauri_plugin_store::Store;
+use tauri_plugin_store::{Store, StoreBuilder};
+use core::windows::register_window;
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-use core::{global_shortcut, nsapp, store, tray, window_effects, windows::close_window};
+use core::{global_shortcut, nsapp, tray, window_effects, windows::close_window};
 use modules::ast::service::json_to_ts_interface;
 use modules::clipboard::service::set_clipboard;
 use modules::file::service::save_file;
 use modules::setting::service::{get_os, get_setting, set_autostart, set_setting_item};
 use modules::translate::service::translate;
 use std::env;
+use std::sync::Arc;
 use tauri_plugin_autostart::{MacosLauncher, ManagerExt};
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
-        .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_store::Builder::default().build())
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_autostart::init(
             MacosLauncher::LaunchAgent,
             Some(vec!["--auto-launch"]),
         ))
-        .plugin(tauri_plugin_store::Builder::default().build())
-        .setup(|app| {
+        .plugin(tauri_plugin_shell::init())
+        .setup(|app: &mut tauri::App| {
             let cnf = global::AppConfig::init(app).unwrap();
             app.manage(cnf);
-            let main_window = app.get_webview_window("main").unwrap();
             let app_handle = app.handle();
-            // main_window.hide().unwrap();
-            // nsapp::run_as_background(&app_handle);
-            store::setup(app)?;
-            let store = app.state::<Store<Wry>>();
+            let store_builder = StoreBuilder::new(app, "store.bin").build().unwrap();
+            app.manage(store_builder);
+            let main_window = app.get_webview_window("main").unwrap();
+            let store = app.state::<Arc<Store<Wry>>>();
             // store.clear();
             // store.save()?;
             window_effects::setup(&main_window);
+            register_window(app_handle, &main_window);
             global_shortcut::setup(app)?;
             let setting = get_setting(store);
             if setting.system.show_tray_icon {
@@ -65,7 +67,6 @@ pub fn run() {
             }
             Ok(())
         })
-        .plugin(tauri_plugin_shell::init())
         .invoke_handler(tauri::generate_handler![
             get_os,
             close_window,

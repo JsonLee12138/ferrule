@@ -23,7 +23,7 @@ global-hotkey = "0.6.2"
 reqwest = "0.12.8"
 sea-orm = { version = "1.0.1", features = ["sqlx-sqlite", "runtime-tokio-native-tls"] }
 tokio = "1.40.0"
-tauri-plugin-store = "2.0.0-rc"
+tauri-plugin-store = "2.1.0"
 sys-locale = "0.3.1"
 tauri-plugin-clipboard-manager = "2.0.1"
 tauri-plugin-dialog = "2.0.0-rc"

@@ -5,7 +5,7 @@ import { useCallback, useMemo, useRef, type FormEventHandler } from 'react';
 
 function Note() {
   return (
-    <div className="w-full h-full overflow-y-auto max-w-[610px] mx-auto mt-[200px]">
+    <div className="w-full h-full overflow-y-auto max-w-[610px] mx-auto pt-[200px] bg-white">
       <JsonInput className='text-4xl ml-[60px] font-semibold
        mr-[50px]' placeholder='新页面' />
       {/* <div tabIndex={0} className="text-3xl ml-[60px] relative min-h-[1.2em]">

@@ -9,6 +9,7 @@ import { Suspense, useEffect } from 'react';
 import { systemEmitter, SystemEvent } from './utils/sysEmitter';
 import FullScreenLoading from './components/FullScreenLoading';
 import useLoadingDelay from './hooks/useLoadingDelay';
+import { AnimatePresence } from 'motion/react';
 
 const theme = createTheme({
   palette: {
@@ -42,10 +43,14 @@ const App = () => {
   return (
     <RecoilRoot>
       <ThemeProvider theme={theme}>
-        {!ready && <FullScreenLoading />}
-        <Suspense>
-          <RouterProvider router={router} />
-        </Suspense>
+        <AnimatePresence>
+          {!ready && (
+              <FullScreenLoading key="fullscreen-loader" />
+          )}
+          <Suspense>
+            <RouterProvider router={router} />
+          </Suspense>
+        </AnimatePresence>
       </ThemeProvider>
     </RecoilRoot>
   );

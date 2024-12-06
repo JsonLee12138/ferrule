@@ -24,7 +24,7 @@ function Note() {
     navigate(`/${newPage.id}`);
   }, [])
   return (
-    <div className="w-screen h-screen flex">
+    <div className="w-screen h-screen flex bg-white/50">
       <aside className="w-[200px] h-full shadow shrink-0">
         <List
           sx={{ backgroundColor: 'rgba(255, 255, 255, 0.5)' }}
@@ -70,7 +70,7 @@ function Note() {
           ))}
         </List>
       </aside>
-      <main className='flex-1 ml-0.5'>
+      <main className='flex-1 overflow-hidden'>
         <Outlet />
       </main>
     </div>

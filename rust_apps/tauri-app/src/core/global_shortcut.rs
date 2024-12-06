@@ -1,13 +1,13 @@
 use super::super::modules::setting::model::Setting;
 use super::windows;
 use global_hotkey::hotkey::HotKey;
-use std::{collections::HashMap, io::ErrorKind, str::FromStr};
+use std::{collections::HashMap, io::ErrorKind, str::FromStr, sync::Arc};
 use tauri::{AppHandle, Error, Manager, Wry};
 use tauri_plugin_global_shortcut::{Builder, GlobalShortcutExt, Shortcut};
 use tauri_plugin_store::Store;
 
 pub fn setup(app: &tauri::App) -> Result<(), tauri::Error> {
-    let store = app.handle().state::<Store<Wry>>();
+    let store = app.handle().state::<Arc<Store<Wry>>>();
     let default_setting = Setting::default();
     let default_setting_json = serde_json::to_value(default_setting).expect("Serialization failed");
     let setting = store.get("setting").unwrap_or(default_setting_json);
