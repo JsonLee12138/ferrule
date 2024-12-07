@@ -7,7 +7,6 @@ import router from '@/router';
 import { RecoilRoot } from 'recoil';
 import { Suspense, useEffect } from 'react';
 import { systemEmitter, SystemEvent } from './utils/sysEmitter';
-import FullScreenLoading from './components/FullScreenLoading';
 import useLoadingDelay from './hooks/useLoadingDelay';
 import { AnimatePresence } from 'motion/react';
 
@@ -40,13 +39,25 @@ const App = () => {
       window.removeEventListener('keyup', () => {});
     };
   }, []);
+
+  useEffect(()=> {
+    let root = document.getElementById('root');
+    let loader = document.getElementById('j-loader-container');
+    if(ready){
+      root?.classList.remove('hidden');
+      loader?.classList.add('hidden');
+      root = null;
+      loader = null;
+    }
+    return ()=> {
+      root = null;
+      loader = null;
+    }
+  }, [ready])
   return (
     <RecoilRoot>
       <ThemeProvider theme={theme}>
         <AnimatePresence>
-          {!ready && (
-              <FullScreenLoading key="fullscreen-loader" />
-          )}
           <Suspense>
             <RouterProvider router={router} />
           </Suspense>
