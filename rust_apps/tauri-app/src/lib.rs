@@ -2,11 +2,10 @@ mod core;
 mod global;
 mod modules;
 
-use tauri::{Manager, WindowEvent, Wry};
+use tauri::{Manager, Wry};
 use tauri_plugin_store::{Store, StoreBuilder};
-use core::windows::register_window;
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-use core::{global_shortcut, nsapp, tray, window_effects, windows::close_window};
+use core::{global_shortcut, nsapp, tray, windows::{close_window, register_all_windows}};
 use modules::ast::service::json_to_ts_interface;
 use modules::clipboard::service::set_clipboard;
 use modules::file::service::save_file;
@@ -27,36 +26,35 @@ pub fn run() {
         ))
         .plugin(tauri_plugin_shell::init())
         .setup(|app: &mut tauri::App| {
+            // 全局注册配置
             let cnf = global::AppConfig::init(app).unwrap();
             app.manage(cnf);
             let app_handle = app.handle();
+            // 全局注册store
             let store_builder = StoreBuilder::new(app, "store.bin").build().unwrap();
             app.manage(store_builder);
-            let main_window = app.get_webview_window("main").unwrap();
             let store = app.state::<Arc<Store<Wry>>>();
+            // 注册所有页面
+            register_all_windows(app_handle)?;
             // store.clear();
             // store.save()?;
-            window_effects::setup(&main_window);
-            register_window(app_handle, &main_window);
             global_shortcut::setup(app)?;
             let setting = get_setting(store);
             if setting.system.show_tray_icon {
                 tray::setup(app)?;
             }
+            // 处理是否打开窗口
+            let main_window = app.get_webview_window("main").unwrap();
             let args: Vec<String> = env::args().collect();
             if args.contains(&"--auto-launch".to_string()) && setting.system.silent_start {
-                main_window.hide().unwrap();
                 nsapp::run_as_background(app_handle);
+            }else{
+                tauri::async_runtime::spawn(async move {
+                    std::thread::sleep(std::time::Duration::from_millis(500));
+                    main_window.show().unwrap();
+                    main_window.set_focus().unwrap();
+                });
             }
-            let app_handle_clone = app_handle.clone();
-            let main_window_clone = main_window.clone();
-            main_window.on_window_event(move |event| {
-                if let WindowEvent::CloseRequested { api, .. } = event {
-                    api.prevent_close(); // 阻止关闭窗口
-                    main_window_clone.hide().unwrap();
-                    nsapp::run_as_background(&app_handle_clone);
-                }
-            });
             // 开机自启
             let autostart_manager: tauri::State<'_, tauri_plugin_autostart::AutoLaunchManager> =
                 app.autolaunch();
