@@ -1,74 +1,74 @@
-name: Release
+# name: Release
 
-on:
-  push:
-    tags:
-      - 'v*'
-  workflow_dispatch:
+# on:
+#   push:
+#     tags:
+#       - 'v*'
+#   workflow_dispatch:
 
-concurrency:
-  group: release-${{ github.ref }}
-  cancel-in-progress: true
+# concurrency:
+#   group: release-${{ github.ref }}
+#   cancel-in-progress: true
 
-jobs:
-  release:
-    strategy:
-      fail-fast: true
-      matrix:
-        platform: [windows-latest, macos-latest]
-        # arch: [x64, arm64]  # macOS 支持多架构打包，Windows 只支持 x64
-        # exclude:
-        #   - platform: windows-latest
-        #     arch: arm64
-    runs-on: ${{ matrix.platform }}
-    steps:
-      - name: Extract and print tag version
-        id: extract_tag
-        run: |
-          VERSION=${GITHUB_REF#refs/tags/}
-          echo "当前打包版本: $VERSION"
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-        shell: bash
+# jobs:
+#   release:
+#     strategy:
+#       fail-fast: true
+#       matrix:
+#         platform: [windows-latest, macos-latest]
+#         # arch: [x64, arm64]  # macOS 支持多架构打包，Windows 只支持 x64
+#         # exclude:
+#         #   - platform: windows-latest
+#         #     arch: arm64
+#     runs-on: ${{ matrix.platform }}
+#     steps:
+#       - name: Extract and print tag version
+#         id: extract_tag
+#         run: |
+#           VERSION=${GITHUB_REF#refs/tags/}
+#           echo "当前打包版本: $VERSION"
+#           echo "VERSION=$VERSION" >> $GITHUB_ENV
+#         shell: bash
 
-      - name: Checkout code
-        uses: actions/checkout@v4
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
+#       - name: Install pnpm
+#         uses: pnpm/action-setup@v4
+#         with:
+#           version: 9
 
-      - name: Set up Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
+#       - name: Set up Rust
+#         uses: actions-rs/toolchain@v1
+#         with:
+#           toolchain: stable
 
-      - name: Install dependencies
-        run: |
-          pnpm install
+#       - name: Install dependencies
+#         run: |
+#           pnpm install
 
-      # - name: Build frontend
-      #   run: |
-      #     cd frontend_apps/pc-ferrume
-      #     echo "当前打包版本: ${{ env.VERSION }}"
-      #     pnpm run build
+#       # - name: Build frontend
+#       #   run: |
+#       #     cd frontend_apps/pc-ferrume
+#       #     echo "当前打包版本: ${{ env.VERSION }}"
+#       #     pnpm run build
 
-      - name: Build frontend
-        run: |
-          echo "当前打包版本: ${{ env.VERSION }}"
-          pnpm run build:all
+#       - name: Build frontend
+#         run: |
+#           echo "当前打包版本: ${{ env.VERSION }}"
+#           pnpm run build:all
 
-      - name: Create release
-        id: create_release
-        uses: tauri-apps/tauri-action@v0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          working-directory: ./rust_apps/tauri-app
-          # tagName: v__VERSION__
-          tagName: ${{ env.VERSION }}
-          # releaseName: 'v__VERSION__'
-          releaseName: '${{ env.VERSION }}'
-          releaseBody: 'See the assets to download and install this version.'
-          releaseDraft: false
-          prerelease: false
+#       - name: Create release
+#         id: create_release
+#         uses: tauri-apps/tauri-action@v0
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         with:
+#           working-directory: ./rust_apps/tauri-app
+#           # tagName: v__VERSION__
+#           tagName: ${{ env.VERSION }}
+#           # releaseName: 'v__VERSION__'
+#           releaseName: '${{ env.VERSION }}'
+#           releaseBody: 'See the assets to download and install this version.'
+#           releaseDraft: false
+#           prerelease: false
