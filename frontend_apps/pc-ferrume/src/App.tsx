@@ -21,39 +21,39 @@ const theme = createTheme({
 const App = () => {
   const [ready] = useLoadingDelay(800);
   useEffect(() => {
-    let isComposing = false;
-    window.addEventListener('compositionstart', () => {
-      isComposing = true;
-    });
+    let lock = false;
     window.addEventListener('compositionend', () => {
-      isComposing = false;
+      lock = true;
     });
     window.addEventListener('keyup', (e) => {
-      if (e.key === 'Escape' && !isComposing) {
+      if (lock) {
+        lock = false;
+        return;
+      }
+      if (e.key === 'Escape' && !e.isComposing) {
         systemEmitter.emit(SystemEvent.ESC);
       }
     });
     return () => {
-      window.removeEventListener('compositionstart', () => {});
       window.removeEventListener('compositionend', () => {});
       window.removeEventListener('keyup', () => {});
     };
   }, []);
 
-  useEffect(()=> {
+  useEffect(() => {
     let root = document.getElementById('root');
     let loader = document.getElementById('j-loader-container');
-    if(ready){
+    if (ready) {
       root?.classList.remove('hidden');
       loader?.classList.add('hidden');
       root = null;
       loader = null;
     }
-    return ()=> {
+    return () => {
       root = null;
       loader = null;
-    }
-  }, [ready])
+    };
+  }, [ready]);
   return (
     <RecoilRoot>
       <ThemeProvider theme={theme}>
