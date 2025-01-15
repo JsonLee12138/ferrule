@@ -17,3 +17,5 @@ node_modules
 Cargo.lock
 bun.lockb
 pnpm-lock.lock
+.idea
+.vscode
