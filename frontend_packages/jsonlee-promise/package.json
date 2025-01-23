@@ -13,7 +13,8 @@
   "module": "./dist/index.js",
   "types": "./types/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
   "description": "Enhanced adapter for promise",
   "keywords": [
